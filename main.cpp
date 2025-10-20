@@ -127,7 +127,8 @@ int main() {
         for (const size_t& size : sizes ) {
             std::vector<double> vec1 = generateRandomVector(size);
             std::vector<double> vec2 = generateRandomVector(size);
-            std::cout << std::format("\n===================\nSize of generated test dataset: {} \n \n", size);
+            std::cout << "===============================\n";
+            std::cout << std::format("Size of generated test dataset: {} \n", size);
             testStandardAlgorithms(vec1, vec2, ITERATIONS_NUMBER);
             testCustomInnerProduct(vec1, vec2, ITERATIONS_NUMBER);
         }
