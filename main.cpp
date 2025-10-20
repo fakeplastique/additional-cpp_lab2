@@ -69,30 +69,30 @@ T parallel_inner_product(Iterator first1, Iterator last1, Iterator first2, T ini
 void testStandardAlgorithms(const vector<double>& vec1, const vector<double>& vec2, int iterations = 1) {
     double result;
 
-    std::cout << "inner product without policy \n";
+    std::cout << "inner_product without policy: ";
     timeit([&vec1, &vec2, &result]() {
         result = inner_product(vec1.begin(), vec1.end(), vec2.begin(), 0.0);
     });
 
-    std::cout << "transform reduce seq \n";
+    std::cout << "transform_reduce + seq: ";
     timeit([&vec1, &vec2, &result]() {
         result = std::transform_reduce(execution::seq,
                                 vec1.begin(), vec1.end(), vec2.begin(), 0.0);
     }, iterations);
 
-    std::cout << "transform reduce par \n";
+    std::cout << "transform_reduce + par: ";
     timeit([&vec1, &vec2, &result]() {
         result = std::transform_reduce(execution::par,
                                 vec1.begin(), vec1.end(), vec2.begin(), 0.0);
     }, iterations);
 
-    std::cout << "transform reduce unseq \n";
+    std::cout << "transform_reduce + unseq: ";
     timeit([&vec1, &vec2, &result]() {
         result = std::transform_reduce(execution::unseq,
                                 vec1.begin(), vec1.end(), vec2.begin(), 0.0);
     }, iterations);
 
-    std::cout << "transform reduce par_unseq \n";
+    std::cout << "transform_reduce par_unseq: ";
     timeit([&vec1, &vec2, &result]() {
         result = std::transform_reduce(execution::par_unseq,
                                 vec1.begin(), vec1.end(), vec2.begin(), 0.0);
@@ -106,7 +106,7 @@ void testCustomInnerProduct(const vector<double>& vec1, const vector<double>& ve
     const unsigned int number_of_threads = hardware_threads != 0 ? hardware_threads : 2;
 
     for (unsigned long i = 1; i <= number_of_threads; ++i) {
-        std::cout << std::format("custom algorithm with {} threads: ", i) << std::endl;
+        std::cout << std::format("custom algorithm with {} threads: ", i);
         timeit([&vec1, &vec2, &result, &i]() {
             result = parallel_inner_product(vec1.begin(), vec1.end(), vec2.begin(), 0.0, i);
         }, iterations);
