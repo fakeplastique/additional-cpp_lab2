@@ -123,13 +123,19 @@ int main() {
         100000000
     };
 
-    for (const size_t& size : sizes ) {
-        std::vector<double> vec1 = generateRandomVector(size);
-        std::vector<double> vec2 = generateRandomVector(size);
-        std::cout << std::format("\n===================\nSize of generated test dataset: {} \n \n", size);
-        testStandardAlgorithms(vec1, vec2, ITERATIONS_NUMBER);
-        testCustomInnerProduct(vec1, vec2, ITERATIONS_NUMBER);
+    try {
+        for (const size_t& size : sizes ) {
+            std::vector<double> vec1 = generateRandomVector(size);
+            std::vector<double> vec2 = generateRandomVector(size);
+            std::cout << std::format("\n===================\nSize of generated test dataset: {} \n \n", size);
+            testStandardAlgorithms(vec1, vec2, ITERATIONS_NUMBER);
+            testCustomInnerProduct(vec1, vec2, ITERATIONS_NUMBER);
+        }
+    } catch (const std::exception& e) {
+        std::cout << "Unhandled exception: " << e.what() << std::endl;
+        return 1;
     }
+
 
     return 0;
 }
