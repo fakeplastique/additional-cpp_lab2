@@ -105,8 +105,11 @@ void testCustomInnerProduct(const vector<double>& vec1, const vector<double>& ve
     const unsigned int hardware_threads = std::thread::hardware_concurrency();
     const unsigned int number_of_threads = hardware_threads != 0 ? hardware_threads : 2;
 
+    std::cout << "Custom algorithm test: " << std::endl;
+    std::cout << std::setw(15) << "Threads"  << std::setw(20) << "Time(s)" << std::endl;
     for (unsigned long i = 1; i <= number_of_threads; ++i) {
-        std::cout << std::format("custom algorithm with {} threads: ", i);
+        std::cout << std::setw(15) << std::format("{} threads ", i);
+        std::cout << std::setw(20);
         timeit([&vec1, &vec2, &result, &i]() {
             result = parallel_inner_product(vec1.begin(), vec1.end(), vec2.begin(), 0.0, i);
         }, iterations);
