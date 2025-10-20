@@ -12,16 +12,13 @@ std::vector<double> generateRandomVector(size_t size, double min_val = -100.0, d
     std::random_device rd;
     mt19937 gen(rd());
     std::uniform_real_distribution<double> dis(min_val, max_val);
-    
+
     std::vector<double> vec(size);
     for(auto& elem : vec) {
         elem = dis(gen);
     }
     return vec;
 }
-
-#include <thread>
-#include <vector>
 
 
 template<typename Iterator, typename T>
